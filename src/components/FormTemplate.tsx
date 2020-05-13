@@ -12,6 +12,7 @@ export const ApiFormTemplate = ({ children }: ApiFormTemplateProps) => {
       marginLeft="auto"
       marginRight="auto"
       marginTop="6rem"
+      marginBottom="6rem"
       borderRadius="5px"
       overflow="hidden"
     >
