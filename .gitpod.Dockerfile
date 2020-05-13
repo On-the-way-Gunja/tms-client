@@ -6,6 +6,7 @@ RUN sudo apt-get update && \
   sudo apt-get install -y zsh
 RUN brew install exa
 RUN brew install bat
+RUN brew install htop
 RUN npm install -g npm-check-updates
 
 RUN sudo chsh -s /usr/bin/zsh
