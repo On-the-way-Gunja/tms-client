@@ -19,7 +19,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-lorem-component": "^0.13.0",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-actions": "^2.6.5",
     "typescript": "^3.9.2"
   },
   "scripts": {
@@ -44,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@types/redux-actions": "^2.6.1",
     "prettier": "^2.0.5",
     "typescript-styled-plugin": "^0.15.0"
   }
