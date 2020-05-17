@@ -25,7 +25,12 @@ const SubmitModalButton = ({ modalBody, onSubmit }: SubmitModalButtonProps) => {
   };
   return (
     <>
-      <Button onClick={onSubmitClick} borderRadius={0} width="100%">
+      <Button
+        type="submit"
+        onClick={onSubmitClick}
+        borderRadius={0}
+        width="100%"
+      >
         Submit
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>

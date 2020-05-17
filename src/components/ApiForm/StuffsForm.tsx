@@ -10,7 +10,7 @@ import {
   Heading,
   Divider,
 } from "@chakra-ui/core";
-import { Field, reduxForm, FieldArray } from "redux-form";
+import { Field, FieldArray } from "redux-form";
 
 // TODO: Now, add state management
 // TODO: and need to make lots of drivers, stuffs available.
@@ -133,21 +133,11 @@ const renderStuffs = ({ fields }: any) => (
 );
 
 const StuffsForm = (props: any) => {
-  const { handleSubmit, reset } = props;
-  return (
-    <form onSubmit={handleSubmit}>
-      <FieldArray name="stuffs" component={renderStuffs} />
-      <Box>
-        <Button type="submit">Submit</Button>
-        <Button type="button" onClick={reset}>
-          Clear Values
-        </Button>
-      </Box>
-    </form>
-  );
+  return <FieldArray name="stuffs" component={renderStuffs} />;
 };
 
 // export default StuffsForm;
-export default reduxForm({
-  form: "stuffsForm", // a unique identifier for this form
-})(StuffsForm);
+// export default reduxForm({
+//   form: "stuffsForm", // a unique identifier for this form
+// })(StuffsForm);
+export default StuffsForm;

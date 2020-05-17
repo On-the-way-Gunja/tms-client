@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, FieldArray, reduxForm } from "redux-form";
+import { Field, FieldArray } from "redux-form";
 import {
   Box,
   FormLabel,
@@ -102,21 +102,11 @@ const renderDrivers = ({ fields }: any) => (
 );
 
 const DriversForm = (props: any) => {
-  const { handleSubmit, reset } = props;
-  return (
-    <form onSubmit={handleSubmit}>
-      <FieldArray name="drivers" component={renderDrivers} />
-      <Box>
-        <Button type="submit">Submit</Button>
-        <Button type="button" onClick={reset}>
-          Clear Values
-        </Button>
-      </Box>
-    </form>
-  );
+  return <FieldArray name="drivers" component={renderDrivers} />;
 };
 
 // export default DriversForm;
-export default reduxForm({
-  form: "driversForm", // a unique identifier for this form
-})(DriversForm);
+// export default reduxForm({
+//   form: "driversForm", // a unique identifier for this form
+// })(DriversForm);
+export default DriversForm;

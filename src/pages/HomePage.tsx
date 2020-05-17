@@ -1,27 +1,14 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { ApiFormTemplate } from "../components/FormTemplate";
-import Lorem from "react-lorem-component";
-import SubmitModalButton from "../components/SubmitModalButton";
-import DriversForm from "../components/Form/DriversForm";
 import submit from "../lib/submitTest";
-import StuffsForm from "../components/Form/StuffsForm";
+import ApiForm from "../components/ApiForm";
 
 export type HomePageProps = {};
 
 const HomePage = (props: HomePageProps) => {
   return (
     <Layout>
-      <ApiFormTemplate>
-        <DriversForm onSubmit={submit} />
-        <StuffsForm onSubmit={submit} />
-        <SubmitModalButton
-          modalBody={<Lorem />}
-          onSubmit={(name: string) => {
-            console.log(name);
-          }}
-        />
-      </ApiFormTemplate>
+      <ApiForm onSubmit={submit} />
     </Layout>
   );
 };
