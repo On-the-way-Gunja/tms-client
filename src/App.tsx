@@ -14,7 +14,7 @@ const apiTest = async () => {
 };
 
 function App() {
-  apiTest();
+  // apiTest();
 
   return <HomePage />;
 }

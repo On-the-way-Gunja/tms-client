@@ -1,11 +1,10 @@
 import React from "react";
 import ContactForm from "../components/FormExample";
+import DriversForm from "../components/DriversForm";
+import submit from "../lib/submitTest";
 
 const ContactPage = () => {
-  const submit = (values: any) => {
-    console.log(values);
-  };
-  return <ContactForm onSubmit={submit} />;
+  return <DriversForm onSubmit={submit} />;
 };
 
 export default ContactPage;
