@@ -2,13 +2,17 @@ import React from "react";
 import { Box, Flex, Button } from "@chakra-ui/core";
 import DriversForm from "./DriversForm";
 import StuffsForm from "./StuffsForm";
-import { reduxForm } from "redux-form";
+import { reduxForm, InjectedFormProps } from "redux-form";
 
-export type ApiFormTemplateProps = {
-  children: React.ReactNode;
+type CustomProps = {
+  actions?: any;
+  loadingToken?: any;
+  loadingData?: any;
 };
 
-const ApiForm = (props: any) => {
+const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
+  props: any
+) => {
   const { handleSubmit, reset } = props;
 
   return (
@@ -45,6 +49,6 @@ const ApiForm = (props: any) => {
   );
 };
 
-export default reduxForm({
+export default reduxForm<{}, CustomProps>({
   form: "apiForm", // a unique identifier for this form
 })(ApiForm);

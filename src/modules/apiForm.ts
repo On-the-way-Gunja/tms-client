@@ -1,55 +1,20 @@
 import { createAction, handleActions } from "redux-actions";
-import { call, put, takeLatest } from "redux-saga/effects";
+import { takeLatest } from "redux-saga/effects";
 import * as api from "../lib/api";
-import { startLoading, finishLoading } from "./loading";
+import createRequestSaga from "../lib/createRequestSaga";
 
 // Action Type
 const GET_TOKEN = "apiForm/GET_TOKEN";
 const GET_TOKEN_SUCCESS = "apiForm/GET_TOKEN_SUCCESS";
-const GET_TOKEN_FAILURE = "apiForm/GET_TOKEN_FAILURE";
 
 const GET_DATA = "apiForm/GET_DATA";
 const GET_DATA_SUCCESS = "apiForm/GET_DATA_SUCCESS";
-const GET_DATA_FAILURE = "apiForm/GET_DATA_FAILURE";
 
 export const getToken = createAction(GET_TOKEN);
-export const getData = createAction(GET_DATA, (form: any) => form);
+export const getData = createAction(GET_DATA, (token: any) => token);
 
-function* getTokenSaga(action: any) {
-  yield put(startLoading(GET_TOKEN)); // Start Loading
-  try {
-    const token = yield call(api.getToken);
-    yield put({
-      type: GET_TOKEN_SUCCESS,
-      payload: token,
-    });
-  } catch (e) {
-    yield put({
-      type: GET_TOKEN_FAILURE,
-      payload: e,
-      error: true,
-    });
-  }
-  yield put(finishLoading(GET_TOKEN)); // Finish Loading
-}
-
-function* getDataSaga(action: any) {
-  yield put(startLoading(GET_DATA)); // Start Loading
-  try {
-    const actions = yield call(api.getData, action.payload);
-    yield put({
-      type: GET_DATA_SUCCESS,
-      payload: actions,
-    });
-  } catch (e) {
-    yield put({
-      type: GET_DATA_FAILURE,
-      payload: e,
-      error: true,
-    });
-  }
-  yield put(finishLoading(GET_DATA)); // Finish Loading
-}
+const getTokenSaga = createRequestSaga(GET_TOKEN, api.getToken);
+const getDataSaga = createRequestSaga(GET_DATA, api.getData);
 
 export function* apiFormSaga() {
   yield takeLatest(GET_TOKEN, getTokenSaga);
