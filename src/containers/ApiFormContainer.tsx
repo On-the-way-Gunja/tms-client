@@ -2,6 +2,7 @@ import React from "react";
 import ApiForm from "../components/ApiForm";
 import { connect } from "react-redux";
 import { getToken, getData } from "../modules/apiForm";
+import formToApiSchema from "../lib/formToApiSchema";
 
 const { useEffect } = React;
 
@@ -16,14 +17,10 @@ const ApiFormContainer = ({
   // Load token once
   useEffect(() => {
     getToken();
-  }, []);
-  // Load Data
-  // useEffect(() => {
-  //   getData();
-  // }, [getData]);
+  }, [getToken]);
 
-  const onSubmit = () => {
-    getData(token);
+  const onSubmit = (values: any) => {
+    getData({ token: token, value: formToApiSchema(values) });
   };
 
   return (

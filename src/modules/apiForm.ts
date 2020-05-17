@@ -11,7 +11,10 @@ const GET_DATA = "apiForm/GET_DATA";
 const GET_DATA_SUCCESS = "apiForm/GET_DATA_SUCCESS";
 
 export const getToken = createAction(GET_TOKEN);
-export const getData = createAction(GET_DATA, (token: any) => token);
+export const getData = createAction(GET_DATA, ({ token, value }: any) => ({
+  token,
+  value,
+}));
 
 const getTokenSaga = createRequestSaga(GET_TOKEN, api.getToken);
 const getDataSaga = createRequestSaga(GET_DATA, api.getData);
