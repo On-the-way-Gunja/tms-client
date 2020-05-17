@@ -3,9 +3,9 @@ import Layout from "../components/Layout";
 import { ApiFormTemplate } from "../components/FormTemplate";
 import Lorem from "react-lorem-component";
 import SubmitModalButton from "../components/SubmitModalButton";
-import DriversForm from "../components/DriversForm";
+import DriversForm from "../components/Form/DriversForm";
 import submit from "../lib/submitTest";
-import StuffsForm from "../components/StuffsForm";
+import StuffsForm from "../components/Form/StuffsForm";
 
 export type HomePageProps = {};
 
