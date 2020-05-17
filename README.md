@@ -8,7 +8,7 @@ This repository is On-The-Way service frontend client repository.
 
 1. Run `yarn` to install packages.
 2. Add `.env` file at the root.
-3. Add the environment variable `REACT_APP_KEY`. Example below.
+3. Add the environment variable `REACT_APP_KEY`, `REACT_APP_URI`. Example below.
 
 ```
 REACT_APP_KEY=somekey
