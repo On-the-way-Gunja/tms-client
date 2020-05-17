@@ -16,14 +16,14 @@ const ApiFormContainer = ({
   // Load token once
   useEffect(() => {
     getToken();
-  }, [getToken]);
+  }, []);
   // Load Data
-  useEffect(() => {
-    getData();
-  }, [getData]);
+  // useEffect(() => {
+  //   getData();
+  // }, [getData]);
 
   const onSubmit = () => {
-    console.log("submitted!!");
+    getData(token);
   };
 
   return (
@@ -32,6 +32,7 @@ const ApiFormContainer = ({
       actions={actions}
       loadingToken={loadingToken}
       loadingData={loadingData}
+      token={token}
     />
   );
 };
