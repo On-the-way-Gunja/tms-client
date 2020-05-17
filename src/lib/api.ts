@@ -7,16 +7,12 @@ export const getToken = async () => {
   console.log(keyData);
   const {
     data: { token },
-  } = await axios.post(
-    "https://3000-b0da17da-5195-4929-872c-7476c926365c.ws-us02.gitpod.io/token",
-    keyData,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        accept: "application/json",
-      },
-    }
-  );
+  } = await axios.post(`${process.env.REACT_APP_URI}/token`, keyData, {
+    headers: {
+      "Content-Type": "application/json",
+      accept: "application/json",
+    },
+  });
   return token;
 };
 
@@ -53,15 +49,11 @@ export const getData = async ({ token, value }: any) => {
   // };
   const {
     data: { actions },
-  } = await axios.post(
-    "https://3000-b0da17da-5195-4929-872c-7476c926365c.ws-us02.gitpod.io/path",
-    value,
-    {
-      headers: {
-        "API-TOKEN": token,
-      },
-    }
-  );
+  } = await axios.post(`${process.env.REACT_APP_URI}/path`, value, {
+    headers: {
+      "API-TOKEN": token,
+    },
+  });
 
   return actions;
 };
