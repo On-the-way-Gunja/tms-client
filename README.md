@@ -6,14 +6,16 @@ This repository is On-The-Way service frontend client repository.
 
 ## How to preview
 
-1. Add `.env` file at the root.
-2. Add the environment variable `REACT_APP_KEY`. Example below.
+1. Run `yarn` to install packages.
+2. Add `.env` file at the root.
+3. Add the environment variable `REACT_APP_KEY`. Example below.
 
 ```
 REACT_APP_KEY=somekey
+REACT_APP_URI=your_server_uri_without_last_'/' (e.g. www.myserver.com)
 ```
 
-3.
+4.
 
 ```
 yarn start
