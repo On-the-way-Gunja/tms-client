@@ -1,3 +1,3 @@
-import KakaoMap from "./KakaoMap";
+import MapBox from "./MapBox";
 
-export default KakaoMap;
+export default MapBox;

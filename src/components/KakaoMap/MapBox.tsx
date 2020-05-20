@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-const KakaoMap = () => {
+const MapBox = () => {
   useEffect(() => {
     let container = document.getElementById("map");
     let options = {
@@ -26,4 +26,4 @@ const KakaoMap = () => {
   );
 };
 
-export default KakaoMap;
+export default MapBox;
