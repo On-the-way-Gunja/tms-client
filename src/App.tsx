@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
-import KakaoMap from "./components/KakaoMap";
+import NaverMap from "./components/NaverMap";
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact={true} path={"/"} component={HomePage}></Route>
-        <Route path={"/map"} component={KakaoMap}></Route>
+        <Route path={"/map"} component={NaverMap}></Route>
       </Switch>
     </BrowserRouter>
   );
