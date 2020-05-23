@@ -3,6 +3,7 @@ import { Box, Flex, Button } from "@chakra-ui/core";
 import DriversForm from "./DriversForm";
 import StuffsForm from "./StuffsForm";
 import { reduxForm, InjectedFormProps } from "redux-form";
+import NaverMap from "../NaverMap";
 
 type CustomProps = {
   actions?: any;
@@ -71,6 +72,7 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
               {`actions is ${JSON.stringify(actions)}`}
             </Box>
           )}
+          <NaverMap width="100%" height="512px" />
         </Box>
       </Box>
     </>

@@ -1,5 +1,5 @@
 import React from "react";
-import { NaverMap, Polyline } from "react-naver-maps";
+import { NaverMap, Polyline, Marker } from "react-naver-maps";
 
 declare global {
   interface Window {
@@ -19,6 +19,29 @@ const arrayToPath = (arr: LatLongPairArray, navermaps: any) => {
   return arr.map(
     (pair: LatLongPair) => new navermaps.LatLng(pair.lat, pair.long)
   );
+};
+
+const getStartEndMarker = (arr: LatLongPairArray, navermaps: any) => {
+  return [
+    <Marker
+      key={0}
+      position={new navermaps.LatLng(arr[0].lat, arr[0].long)}
+      animation={2}
+      onClick={() => {
+        alert("이곳이 출발지입니다");
+      }}
+    />,
+    <Marker
+      key={1}
+      position={
+        new navermaps.LatLng(arr[arr.length - 1].lat, arr[arr.length - 1].long)
+      }
+      animation={2}
+      onClick={() => {
+        alert("이곳이 도착지입니다");
+      }}
+    />,
+  ];
 };
 
 type MapDivProps = {
@@ -68,6 +91,7 @@ const MapDiv = ({
         strokeOpacity={1}
         strokeWeight={5}
       />
+      {path && getStartEndMarker(path, navermaps)}
       {children}
     </NaverMap>
   );
@@ -85,7 +109,6 @@ MapDiv.defaultProps = {
     { lat: 37.3606921307849, long: 127.10452079772949 },
     { lat: 37.36821310838941, long: 127.10814714431763 },
     { lat: 37.360760351656545, long: 127.11299657821654 },
-    { lat: 37.365620929135716, long: 127.1036195755005 },
   ],
 };
 
