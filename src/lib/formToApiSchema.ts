@@ -26,12 +26,12 @@
 const formToApiSchema = (form: any) => {
   const { drivers, stuffs } = form;
   const apiDrivers = drivers.map((driver: any) => ({
-    avail_radius: parseInt(driver.avail_radius),
+    avail_radius: parseFloat(driver.avail_radius),
     id: driver.id,
     position: {
       id: driver.position_id,
-      lat: parseInt(driver.position_lat),
-      long: parseInt(driver.position_long),
+      lat: parseFloat(driver.position_lat),
+      long: parseFloat(driver.position_long),
     },
   }));
   const apiStuffs = stuffs.map((stuff: any) => ({
@@ -39,14 +39,14 @@ const formToApiSchema = (form: any) => {
     recver_name: stuff.recver_name,
     recver_position: {
       id: stuff.recver_position_id,
-      lat: parseInt(stuff.recver_position_lat),
-      long: parseInt(stuff.recver_position_long),
+      lat: parseFloat(stuff.recver_position_lat),
+      long: parseFloat(stuff.recver_position_long),
     },
     sender_name: stuff.sender_name,
     sender_position: {
       id: stuff.sender_position_id,
-      lat: parseInt(stuff.sender_position_lat),
-      long: parseInt(stuff.sender_position_long),
+      lat: parseFloat(stuff.sender_position_lat),
+      long: parseFloat(stuff.sender_position_long),
     },
   }));
   return {
