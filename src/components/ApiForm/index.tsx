@@ -7,6 +7,7 @@ import NaverMap from "../NaverMap";
 
 type CustomProps = {
   actions?: any;
+  naver_result?: any;
   loadingToken?: any;
   loadingData?: any;
   token?: any;
@@ -17,7 +18,14 @@ type CustomProps = {
 const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
   props: any
 ) => {
-  const { onClear, handleSubmit, reset, actions, submitted } = props;
+  const {
+    onClear,
+    handleSubmit,
+    reset,
+    actions,
+    naver_result,
+    submitted,
+  } = props;
 
   const handleSubmitWithModal = (event: any) => {
     event.preventDefault();
@@ -70,6 +78,7 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
               overflow="hidden"
             >
               {`actions is ${JSON.stringify(actions)}`}
+              {`naver_result is ${JSON.stringify(naver_result)}`}
             </Box>
           )}
           <NaverMap width="100%" height="512px" />

@@ -31,6 +31,7 @@ export function* apiFormSaga() {
 const initialState = {
   token: null,
   actions: null,
+  naver_result: null,
   submitted: false,
 };
 
@@ -42,7 +43,8 @@ const apiForm = handleActions(
     }),
     [GET_DATA_SUCCESS]: (state: any, action: any) => ({
       ...state,
-      actions: action.payload,
+      actions: action.payload.actions,
+      naver_result: action.payload.naver_result,
       submitted: true,
     }),
     [CLEAR]: (state: any, action: any) => ({
