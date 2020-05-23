@@ -2,12 +2,18 @@ import React from "react";
 import Layout from "../Layout";
 import { Box } from "@chakra-ui/core";
 import { RenderAfterNavermapsLoaded } from "react-naver-maps";
-import MapDiv from "./MapDiv";
+import MapDiv, { LatLongPairArray } from "./MapDiv";
 
-const Map = () => {
+type MapProps = {
+  path?: LatLongPairArray;
+  width: string;
+  height: string;
+};
+
+const Map = ({ path, width, height }: MapProps) => {
   return (
     <Layout>
-      <Box width="100%" height="100vh">
+      <Box width={width} height={height}>
         <RenderAfterNavermapsLoaded
           ncpClientId={process.env.REACT_APP_NAVER_MAP_KEY} // 자신의 네이버 계정에서 발급받은 Client ID
           error={<p>Maps Load Error</p>}
@@ -15,9 +21,10 @@ const Map = () => {
         >
           <MapDiv
             width="100%"
-            height="100vh"
-            defaultCenterLat={37.554722}
-            defaultCenterLong={126.970833}
+            height="100%"
+            defaultCenterLat={37.3646656}
+            defaultCenterLong={127.108828}
+            path={path}
           />
         </RenderAfterNavermapsLoaded>
       </Box>
@@ -26,3 +33,8 @@ const Map = () => {
 };
 
 export default Map;
+
+Map.defaultProps = {
+  width: "100%",
+  height: "100vh",
+};
