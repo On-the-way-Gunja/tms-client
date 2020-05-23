@@ -1,7 +1,7 @@
 import React from "react";
 import ApiForm from "../components/ApiForm";
 import { connect } from "react-redux";
-import { getToken, getData } from "../modules/apiForm";
+import { getToken, getData, clear } from "../modules/apiForm";
 import formToApiSchema from "../lib/formToApiSchema";
 
 const { useEffect } = React;
@@ -9,8 +9,10 @@ const { useEffect } = React;
 const ApiFormContainer = ({
   getToken,
   getData,
+  clear,
   token,
   actions,
+  submitted,
   loadingToken,
   loadingData,
 }: any) => {
@@ -26,10 +28,12 @@ const ApiFormContainer = ({
   return (
     <ApiForm
       onSubmit={onSubmit}
+      onClear={clear}
       actions={actions}
       loadingToken={loadingToken}
       loadingData={loadingData}
       token={token}
+      submitted={submitted}
     />
   );
 };
@@ -39,11 +43,13 @@ export default connect(
   ({ apiForm, loading }: any) => ({
     actions: apiForm.actions,
     token: apiForm.token,
+    submitted: apiForm.submitted,
     loadingToken: loading.GET_TOKEN,
     loadingData: loading.GET_DATA,
   }),
   {
     getToken,
     getData,
+    clear,
   }
 )(ApiFormContainer);

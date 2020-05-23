@@ -10,11 +10,14 @@ const GET_TOKEN_SUCCESS = "apiForm/GET_TOKEN_SUCCESS";
 const GET_DATA = "apiForm/GET_DATA";
 const GET_DATA_SUCCESS = "apiForm/GET_DATA_SUCCESS";
 
+const CLEAR = "apiForm/CLEAR";
+
 export const getToken = createAction(GET_TOKEN);
 export const getData = createAction(GET_DATA, ({ token, value }: any) => ({
   token,
   value,
 }));
+export const clear = createAction(CLEAR);
 
 const getTokenSaga = createRequestSaga(GET_TOKEN, api.getToken);
 const getDataSaga = createRequestSaga(GET_DATA, api.getData);
@@ -28,6 +31,7 @@ export function* apiFormSaga() {
 const initialState = {
   token: null,
   actions: null,
+  submitted: false,
 };
 
 const apiForm = handleActions(
@@ -39,6 +43,11 @@ const apiForm = handleActions(
     [GET_DATA_SUCCESS]: (state: any, action: any) => ({
       ...state,
       actions: action.payload,
+      submitted: true,
+    }),
+    [CLEAR]: (state: any, action: any) => ({
+      ...state,
+      submitted: false,
     }),
   },
   initialState
