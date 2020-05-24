@@ -12,7 +12,7 @@ const GET_DATA_SUCCESS = "apiForm/GET_DATA_SUCCESS";
 
 const CLEAR = "apiForm/CLEAR";
 
-export const getToken = createAction(GET_TOKEN);
+export const getToken = createAction(GET_TOKEN, ({ key }: any) => ({ key }));
 export const getData = createAction(GET_DATA, ({ token, value }: any) => ({
   token,
   value,

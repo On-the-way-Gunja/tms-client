@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const getToken = async () => {
+export const getToken = async ({ key }: any) => {
   const keyData = {
-    key: process.env.REACT_APP_KEY,
+    key,
   };
   const {
     data: { token },

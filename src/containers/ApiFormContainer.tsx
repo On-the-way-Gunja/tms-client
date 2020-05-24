@@ -3,8 +3,7 @@ import ApiForm from "../components/ApiForm";
 import { connect } from "react-redux";
 import { getToken, getData, clear } from "../modules/apiForm";
 import formToApiSchema from "../lib/formToApiSchema";
-
-const { useEffect } = React;
+import TokenInput from "../components/TokenInput";
 
 const ApiFormContainer = ({
   getToken,
@@ -18,27 +17,33 @@ const ApiFormContainer = ({
   loadingToken,
   loadingData,
 }: any) => {
-  // Load token once
-  useEffect(() => {
-    getToken();
-  }, [getToken]);
+  const onSubmitKey = (values: any) => {
+    console.log(values);
+    getToken({ key: values.key });
+  };
 
   const onSubmit = (values: any) => {
     getData({ token: token, value: formToApiSchema(values) });
   };
 
   return (
-    <ApiForm
-      onSubmit={onSubmit}
-      onClear={clear}
-      actions={actions}
-      naver_actual_result={naver_actual_result}
-      naver_every_result={naver_every_result}
-      loadingToken={loadingToken}
-      loadingData={loadingData}
-      token={token}
-      submitted={submitted}
-    />
+    <>
+      {token ? (
+        <ApiForm
+          onSubmit={onSubmit}
+          onClear={clear}
+          actions={actions}
+          naver_actual_result={naver_actual_result}
+          naver_every_result={naver_every_result}
+          loadingToken={loadingToken}
+          loadingData={loadingData}
+          token={token}
+          submitted={submitted}
+        />
+      ) : (
+        <TokenInput onSubmit={onSubmitKey} />
+      )}
+    </>
   );
 };
 
