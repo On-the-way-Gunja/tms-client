@@ -18,7 +18,7 @@ const ApiFormContainer = ({
   loadingData,
 }: any) => {
   const onSubmitKey = (values: any) => {
-    console.log(values);
+    // console.log(values);
     getToken({ key: values.key });
   };
 
