@@ -19,11 +19,11 @@ export type LatLongPairArray = LatLongPair[];
 
 // FIXME: Need to fix lat and long after deployed.
 const arrayToPath = (arr: LatLongPairArray, navermaps: any) => {
-  console.log("arr is", arr);
+  // console.log("arr is", arr);
   const res = arr.map(
     (pair: LatLongPair) => new navermaps.LatLng(pair.long, pair.lat)
   );
-  console.log(res);
+  // console.log(res);
   return res;
 };
 
@@ -48,7 +48,7 @@ const MapDiv = ({
 }: MapDivProps) => {
   const navermaps = window.naver.maps;
 
-  console.log(driverPathArray);
+  // console.log(driverPathArray);
 
   return (
     <NaverMap

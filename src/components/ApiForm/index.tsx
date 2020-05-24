@@ -58,8 +58,8 @@ const calculateFromActions = (actions: any, naver_every_result: any) => {
     let pathFromApi: LatLongFromNaverArray = [];
     pathKey.forEach((key: string) => {
       naver_every_result.forEach((item: any) => {
-        console.log(item);
-        console.log("key is", key, "item id is", item.Id);
+        // console.log(item);
+        // console.log("key is", key, "item id is", item.Id);
         if (key === item.Id) {
           pathFromApi = [
             ...pathFromApi,
@@ -72,7 +72,7 @@ const calculateFromActions = (actions: any, naver_every_result: any) => {
 
     DriverPathArray.push(newDriverPath);
   }
-  console.log("driver path array is", DriverPathArray);
+  // console.log("driver path array is", DriverPathArray);
   return DriverPathArray;
 };
 
