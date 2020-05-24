@@ -87,7 +87,8 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
                 width="100%"
                 height="512px"
                 path={convertToLatLongPairArray(
-                  naver_actual_result[Object.keys(naver_actual_result)[0]]
+                  naver_actual_result[Object.keys(naver_actual_result)[0]].route
+                    .traoptimal[0].path
                 )}
               />
             </Box>
