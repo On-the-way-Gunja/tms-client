@@ -59,7 +59,8 @@ const calculateFromActions = (actions: any, naver_every_result: any) => {
     pathKey.forEach((key: string) => {
       naver_every_result.forEach((item: any) => {
         console.log(item);
-        if (key === item.id) {
+        console.log("key is", key, "item id is", item.Id);
+        if (key === item.Id) {
           pathFromApi = [
             ...pathFromApi,
             ...item.ApiResult.route.traoptimal[0].path,
@@ -142,7 +143,6 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
               borderRadius="5px"
               overflow="hidden"
             >
-              {`actions is ${JSON.stringify(actions)}`}
               {/* 
                 TODO: If server response correctly, activate code below.
               */}

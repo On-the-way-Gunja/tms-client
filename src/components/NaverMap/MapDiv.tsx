@@ -16,10 +16,15 @@ export type LatLongPair = {
 export type LatLongPairArray = LatLongPair[];
 
 // array shape is like [{lat: 123.456, long: 123,4565}, {lat: 123.152, long: 195.125}, ...]
+
+// FIXME: Need to fix lat and long after deployed.
 const arrayToPath = (arr: LatLongPairArray, navermaps: any) => {
-  return arr.map(
-    (pair: LatLongPair) => new navermaps.LatLng(pair.lat, pair.long)
+  console.log("arr is", arr);
+  const res = arr.map(
+    (pair: LatLongPair) => new navermaps.LatLng(pair.long, pair.lat)
   );
+  console.log(res);
+  return res;
 };
 
 type MapDivProps = {
@@ -42,6 +47,8 @@ const MapDiv = ({
   driverPathArray,
 }: MapDivProps) => {
   const navermaps = window.naver.maps;
+
+  console.log(driverPathArray);
 
   return (
     <NaverMap
@@ -80,15 +87,17 @@ const MapDiv = ({
               strokeOpacity={1}
               strokeWeight={5}
             />
-            {driverPath.places.map((place: Place) => (
-              <Marker
-                position={new navermaps.LatLng(place.lat, place.long)}
-                animation={2}
-                onClick={() => {
-                  alert(`여기는 ${place.id}입니다.`);
-                }}
-              />
-            ))}
+            <>
+              {driverPath.places.map((place: Place, index: number) => (
+                <Marker
+                  position={new navermaps.LatLng(place.lat, place.long)}
+                  animation={2}
+                  onClick={() => {
+                    alert(`여기는 ${place.id}입니다.`);
+                  }}
+                />
+              ))}
+            </>
           </>
         ))}
       {children}

@@ -21,8 +21,16 @@ const Map = ({ driverPathArray, width, height }: MapProps) => {
         <MapDiv
           width="100%"
           height="100%"
-          defaultCenterLat={127.01168167917474}
-          defaultCenterLong={37.56946547219505}
+          defaultCenterLat={
+            driverPathArray
+              ? driverPathArray[0].places[0].lat
+              : 37.56946547219505
+          }
+          defaultCenterLong={
+            driverPathArray
+              ? driverPathArray[0].places[0].long
+              : 127.01168167917474
+          }
           driverPathArray={driverPathArray}
         />
       </RenderAfterNavermapsLoaded>
