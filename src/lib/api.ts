@@ -17,12 +17,12 @@ export const getToken = async () => {
 
 export const getData = async ({ token, value }: any) => {
   const {
-    data: { actions, naver_result },
+    data: { actions, naver_actual_result },
   } = await axios.post(`${process.env.REACT_APP_URI}/path`, value, {
     headers: {
       "API-TOKEN": token,
     },
   });
 
-  return { actions, naver_result };
+  return { actions, naver_actual_result };
 };

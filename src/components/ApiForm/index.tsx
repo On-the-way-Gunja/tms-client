@@ -4,10 +4,11 @@ import DriversForm from "./DriversForm";
 import StuffsForm from "./StuffsForm";
 import { reduxForm, InjectedFormProps } from "redux-form";
 import NaverMap from "../NaverMap";
+import { convertToLatLongPairArray } from "../../lib/directionConvert";
 
 type CustomProps = {
   actions?: any;
-  naver_result?: any;
+  naver_actual_result?: any;
   loadingToken?: any;
   loadingData?: any;
   token?: any;
@@ -23,7 +24,7 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
     handleSubmit,
     reset,
     actions,
-    naver_result,
+    naver_actual_result,
     submitted,
   } = props;
 
@@ -78,7 +79,17 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
               overflow="hidden"
             >
               {`actions is ${JSON.stringify(actions)}`}
-              {`naver_result is ${JSON.stringify(naver_result)}`}
+              {`naver_actual_result is ${JSON.stringify(naver_actual_result)}`}
+              {/* 
+                TODO: If server response correctly, activate code below.
+              */}
+              <NaverMap
+                width="100%"
+                height="512px"
+                path={convertToLatLongPairArray(
+                  naver_actual_result[Object.keys(naver_actual_result)[0]]
+                )}
+              />
             </Box>
           )}
           <NaverMap width="100%" height="512px" />
