@@ -147,24 +147,14 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
             </Button>
           </form>
           {submitted && (
-            <Box
+            <NaverMap
               width="100%"
-              marginTop="6rem"
-              marginBottom="6rem"
-              overflow="hidden"
-            >
-              {/* 
-                TODO: If server response correctly, activate code below.
-              */}
-              <NaverMap
-                width="100%"
-                height="512px"
-                driverPathArray={calculateFromActions(
-                  actions,
-                  naver_every_result
-                )}
-              />
-            </Box>
+              height="512px"
+              driverPathArray={calculateFromActions(
+                actions,
+                naver_every_result
+              )}
+            />
           )}
         </Box>
       </Box>
