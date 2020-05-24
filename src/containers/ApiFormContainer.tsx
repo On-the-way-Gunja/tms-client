@@ -13,6 +13,7 @@ const ApiFormContainer = ({
   token,
   actions,
   naver_actual_result,
+  naver_every_result,
   submitted,
   loadingToken,
   loadingData,
@@ -32,6 +33,7 @@ const ApiFormContainer = ({
       onClear={clear}
       actions={actions}
       naver_actual_result={naver_actual_result}
+      naver_every_result={naver_every_result}
       loadingToken={loadingToken}
       loadingData={loadingData}
       token={token}
@@ -45,6 +47,7 @@ export default connect(
   ({ apiForm, loading }: any) => ({
     actions: apiForm.actions,
     naver_actual_result: apiForm.naver_actual_result,
+    naver_every_result: apiForm.naver_every_result,
     token: apiForm.token,
     submitted: apiForm.submitted,
     loadingToken: loading.GET_TOKEN,

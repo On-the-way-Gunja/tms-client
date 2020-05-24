@@ -32,6 +32,7 @@ const initialState = {
   token: null,
   actions: null,
   naver_actual_result: null,
+  naver_every_result: null,
   submitted: false,
 };
 
@@ -45,6 +46,7 @@ const apiForm = handleActions(
       ...state,
       actions: action.payload.actions,
       naver_actual_result: action.payload.naver_actual_result,
+      naver_every_result: action.payload.naver_every_result,
       submitted: true,
     }),
     [CLEAR]: (state: any, action: any) => ({
