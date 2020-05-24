@@ -54,19 +54,32 @@ const calculateFromActions = (actions: any, naver_every_result: any) => {
     for (let i = 0; i < placesFromDriver.length - 1; i++) {
       pathKey.push(`${placesFromDriver[i].id}-${placesFromDriver[i + 1].id}`);
     }
+    // console.log(pathKey);
 
     let pathFromApi: LatLongFromNaverArray = [];
     pathKey.forEach((key: string) => {
-      naver_every_result.forEach((item: any) => {
-        // console.log(item);
-        // console.log("key is", key, "item id is", item.Id);
-        if (key === item.Id) {
-          pathFromApi = [
-            ...pathFromApi,
-            ...item.ApiResult.route.traoptimal[0].path,
-          ];
-        }
+      const res = naver_every_result.find((item: any) => {
+        // console.log("key is", key, "Id is", item.Id);
+        return key === item.Id;
       });
+      // console.log(res);
+      if (res !== undefined)
+        pathFromApi = [
+          ...pathFromApi,
+          ...res.ApiResult.route.traoptimal[0].path,
+        ];
+
+      // naver_every_result.forEach((item: any) => {
+      //   // console.log(item);
+      //   console.log("key is", key, "item id is", item.Id);
+      //   if (key === item.Id) {
+      //     pathFromApi = [
+      //       ...pathFromApi,
+      //       ...item.ApiResult.route.traoptimal[0].path,
+      //     ];
+      //     console.log("Matched!! key is", key, "item id is", item.Id);
+      //   }
+      // });
     });
     newDriverPath.path = convertToLatLongPairArray(pathFromApi);
 
@@ -135,12 +148,9 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
           </form>
           {submitted && (
             <Box
-              width="512px"
-              marginLeft="auto"
-              marginRight="auto"
+              width="100%"
               marginTop="6rem"
               marginBottom="6rem"
-              borderRadius="5px"
               overflow="hidden"
             >
               {/* 
