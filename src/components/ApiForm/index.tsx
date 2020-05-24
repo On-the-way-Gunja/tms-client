@@ -83,14 +83,6 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
               {/* 
                 TODO: If server response correctly, activate code below.
               */}
-              <NaverMap
-                width="100%"
-                height="512px"
-                path={convertToLatLongPairArray(
-                  naver_actual_result[Object.keys(naver_actual_result)[0]].route
-                    .traoptimal[0].path
-                )}
-              />
             </Box>
           )}
           <NaverMap width="100%" height="512px" />
