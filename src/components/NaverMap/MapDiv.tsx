@@ -1,5 +1,6 @@
 import React from "react";
 import { NaverMap, Polyline, Marker } from "react-naver-maps";
+import { DriverPath, Place } from "../ApiForm";
 
 declare global {
   interface Window {
@@ -21,29 +22,6 @@ const arrayToPath = (arr: LatLongPairArray, navermaps: any) => {
   );
 };
 
-const getStartEndMarker = (arr: LatLongPairArray, navermaps: any) => {
-  return [
-    <Marker
-      key={0}
-      position={new navermaps.LatLng(arr[0].lat, arr[0].long)}
-      animation={2}
-      onClick={() => {
-        alert("이곳이 출발지입니다");
-      }}
-    />,
-    <Marker
-      key={1}
-      position={
-        new navermaps.LatLng(arr[arr.length - 1].lat, arr[arr.length - 1].long)
-      }
-      animation={2}
-      onClick={() => {
-        alert("이곳이 도착지입니다");
-      }}
-    />,
-  ];
-};
-
 type MapDivProps = {
   children?: React.ReactNode;
   width?: string;
@@ -51,7 +29,7 @@ type MapDivProps = {
   defaultCenterLat?: number;
   defaultCenterLong?: number;
   defaultZoom?: number;
-  path?: LatLongPairArray;
+  driverPathArray?: DriverPath[];
 };
 
 const MapDiv = ({
@@ -61,7 +39,7 @@ const MapDiv = ({
   defaultCenterLat,
   defaultCenterLong,
   defaultZoom,
-  path,
+  driverPathArray,
 }: MapDivProps) => {
   const navermaps = window.naver.maps;
 
@@ -83,7 +61,7 @@ const MapDiv = ({
           alert("여기는 N서울타워입니다.");
         }}
       /> */}
-      <Polyline
+      {/* <Polyline
         path={path && arrayToPath(path, navermaps)}
         // clickable // 사용자 인터랙션을 받기 위해 clickable을 true로 설정합니다.
         strokeColor={"#5347AA"}
@@ -91,7 +69,28 @@ const MapDiv = ({
         strokeOpacity={1}
         strokeWeight={5}
       />
-      {path && getStartEndMarker(path, navermaps)}
+      {path && getStartEndMarker(path, navermaps)} */}
+      {driverPathArray &&
+        driverPathArray.map((driverPath: DriverPath, index: number) => (
+          <>
+            <Polyline
+              path={arrayToPath(driverPath.path, navermaps)}
+              strokeColor={driverPath.color}
+              strokeStyle={"solid"}
+              strokeOpacity={1}
+              strokeWeight={5}
+            />
+            {driverPath.places.map((place: Place) => (
+              <Marker
+                position={new navermaps.LatLng(place.lat, place.long)}
+                animation={2}
+                onClick={() => {
+                  alert(`여기는 ${place.id}입니다.`);
+                }}
+              />
+            ))}
+          </>
+        ))}
       {children}
     </NaverMap>
   );

@@ -1,15 +1,16 @@
 import React from "react";
 import { Box } from "@chakra-ui/core";
 import { RenderAfterNavermapsLoaded } from "react-naver-maps";
-import MapDiv, { LatLongPairArray } from "./MapDiv";
+import MapDiv from "./MapDiv";
+import { DriverPath } from "../ApiForm";
 
 type MapProps = {
-  path?: LatLongPairArray;
+  driverPathArray?: DriverPath[];
   width: string;
   height: string;
 };
 
-const Map = ({ path, width, height }: MapProps) => {
+const Map = ({ driverPathArray, width, height }: MapProps) => {
   return (
     <Box width={width} height={height}>
       <RenderAfterNavermapsLoaded
@@ -20,9 +21,9 @@ const Map = ({ path, width, height }: MapProps) => {
         <MapDiv
           width="100%"
           height="100%"
-          defaultCenterLat={37.3646656}
-          defaultCenterLong={127.108828}
-          path={path}
+          defaultCenterLat={127.01168167917474}
+          defaultCenterLong={37.56946547219505}
+          driverPathArray={driverPathArray}
         />
       </RenderAfterNavermapsLoaded>
     </Box>

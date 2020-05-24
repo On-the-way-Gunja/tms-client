@@ -22,20 +22,20 @@ type CustomProps = {
   onClear?: any;
 };
 
-type Place = {
+export type Place = {
   id: string;
   lat: number;
   long: number;
 };
 
-type DriverPath = {
+export type DriverPath = {
   id: string;
   places: Place[];
   path: LatLongPairArray;
   color: string;
 };
 
-const calculateFromActions = async (actions: any, naver_every_result: any) => {
+const calculateFromActions = (actions: any, naver_every_result: any) => {
   let DriverPathArray: DriverPath[] = [];
   for (let driver in actions) {
     let newDriverPath: DriverPath = {
@@ -88,7 +88,6 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
     handleSubmit,
     reset,
     actions,
-    naver_actual_result,
     naver_every_result,
     submitted,
   } = props;
@@ -144,13 +143,19 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
               overflow="hidden"
             >
               {`actions is ${JSON.stringify(actions)}`}
-              {`naver_actual_result is ${JSON.stringify(naver_actual_result)}`}
               {/* 
                 TODO: If server response correctly, activate code below.
               */}
+              <NaverMap
+                width="100%"
+                height="512px"
+                driverPathArray={calculateFromActions(
+                  actions,
+                  naver_every_result
+                )}
+              />
             </Box>
           )}
-          <NaverMap width="100%" height="512px" />
         </Box>
       </Box>
     </>
