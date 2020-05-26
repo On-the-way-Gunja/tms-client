@@ -19,11 +19,19 @@ const ApiFormContainer = ({
 }: any) => {
   const onSubmitKey = (values: any) => {
     // console.log(values);
+
     getToken({ key: values.key });
   };
 
   const onSubmit = (values: any) => {
-    getData({ token: token, value: formToApiSchema(values) });
+    try {
+      const parsed = JSON.parse(values.jsonInput);
+      // console.log(parsed);
+      getData({ token: token, value: parsed });
+    } catch (e) {
+      // console.log(e);
+      getData({ token: token, value: formToApiSchema(values) });
+    }
   };
 
   return (
