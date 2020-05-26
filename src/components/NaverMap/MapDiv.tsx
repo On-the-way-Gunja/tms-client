@@ -84,7 +84,7 @@ const MapDiv = ({
               path={arrayToPath(driverPath.path, navermaps)}
               strokeColor={driverPath.color}
               strokeStyle={"solid"}
-              strokeOpacity={1}
+              strokeOpacity={0.8}
               strokeWeight={5}
             />
             <>

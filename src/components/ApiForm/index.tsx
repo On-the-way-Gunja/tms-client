@@ -1,15 +1,21 @@
 import React from "react";
-import { Box, Flex, Button } from "@chakra-ui/core";
+import {
+  Box,
+  Flex,
+  Button,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+} from "@chakra-ui/core";
 import DriversForm from "./DriversForm";
 import StuffsForm from "./StuffsForm";
 import { reduxForm, InjectedFormProps } from "redux-form";
 import NaverMap from "../NaverMap";
-import {
-  convertToLatLongPairArray,
-  stringToColour,
-  LatLongFromNaverArray,
-} from "../../lib/directionConvert";
+import { calculateFromActions } from "../../lib/directionConvert";
 import { LatLongPairArray } from "../NaverMap/MapDiv";
+import JsonForm from "./JsonForm";
 
 type CustomProps = {
   actions?: any;
@@ -35,65 +41,6 @@ export type DriverPath = {
   color: string;
 };
 
-const calculateFromActions = (actions: any, naver_every_result: any) => {
-  let DriverPathArray: DriverPath[] = [];
-  for (let driver in actions) {
-    let newDriverPath: DriverPath = {
-      id: driver,
-      places: actions[driver].map((place: any) => ({
-        id: place.coordinate.id,
-        lat: place.coordinate.lat,
-        long: place.coordinate.long,
-      })),
-      path: [],
-      color: stringToColour(driver),
-    };
-
-    let pathKey: string[] = [];
-    const placesFromDriver = newDriverPath.places;
-    for (let i = 0; i < placesFromDriver.length - 1; i++) {
-      pathKey.push(`${placesFromDriver[i].id}-${placesFromDriver[i + 1].id}`);
-    }
-    // console.log(pathKey);
-
-    let pathFromApi: LatLongFromNaverArray = [];
-    pathKey.forEach((key: string) => {
-      const res = naver_every_result.find((item: any) => {
-        // console.log("key is", key, "Id is", item.Id);
-        return key === item.Id;
-      });
-      // console.log(res);
-      if (res !== undefined)
-        pathFromApi = [
-          ...pathFromApi,
-          ...res.ApiResult.route.traoptimal[0].path,
-        ];
-
-      // naver_every_result.forEach((item: any) => {
-      //   // console.log(item);
-      //   console.log("key is", key, "item id is", item.Id);
-      //   if (key === item.Id) {
-      //     pathFromApi = [
-      //       ...pathFromApi,
-      //       ...item.ApiResult.route.traoptimal[0].path,
-      //     ];
-      //     console.log("Matched!! key is", key, "item id is", item.Id);
-      //   }
-      // });
-    });
-    newDriverPath.path = convertToLatLongPairArray(pathFromApi);
-
-    DriverPathArray.push(newDriverPath);
-  }
-  // console.log("driver path array is", DriverPathArray);
-  return DriverPathArray;
-};
-
-// asyncFunction1()
-//   .then(function(result) {
-//     return asyncFunction2()
-//   })
-
 const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
   props: any
 ) => {
@@ -106,12 +53,13 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
     submitted,
   } = props;
 
-  const handleSubmitWithModal = (event: any) => {
-    event.preventDefault();
-    handleSubmit();
-  };
   const handleReset = (event: any) => {
     event.preventDefault();
+    reset();
+    onClear();
+  };
+
+  const handleTabChange = () => {
     reset();
     onClear();
   };
@@ -137,15 +85,35 @@ const ApiForm: React.FC<CustomProps & InjectedFormProps<{}, CustomProps>> = (
         >
           API Form
         </Flex>
-        <Box backgroundColor="white">
-          <form onSubmit={handleSubmitWithModal}>
-            <DriversForm />
-            <StuffsForm />
-            <Button type="submit">Submit</Button>
-            <Button type="button" onClick={handleReset}>
-              Clear Values
-            </Button>
-          </form>
+        <Box backgroundColor="white" paddingTop={3}>
+          <Tabs isFitted variant="enclosed" onChange={handleTabChange}>
+            <TabList mb="1em">
+              <Tab>List Form</Tab>
+              <Tab>JSON Form</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <form onSubmit={handleSubmit}>
+                  <DriversForm />
+                  <StuffsForm />
+                  <Button type="submit">Submit</Button>
+                  <Button type="button" onClick={handleReset}>
+                    Clear Values
+                  </Button>
+                </form>
+              </TabPanel>
+              <TabPanel>
+                <form onSubmit={handleSubmit}>
+                  <JsonForm />
+                  <Button type="submit">Submit</Button>
+                  <Button type="button" onClick={handleReset}>
+                    Clear Values
+                  </Button>
+                </form>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+
           {submitted && (
             <NaverMap
               width="100%"
