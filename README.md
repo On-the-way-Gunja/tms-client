@@ -6,6 +6,9 @@
 
 Meet TMS-Client [here!](http://on-the-way.netlify.app/)
 
+## Status
+Cause backend is not working, this client does not work either.
+
 ## What for?
 
 This repository is On-The-Way service frontend client repository.
