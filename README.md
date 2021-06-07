@@ -1,11 +1,5 @@
 # TMS-Client
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/dbdc97a9-6be5-4c97-86ee-5fb9d9d21174/deploy-status)](https://app.netlify.com/sites/on-the-way/deploys)
-
-## Link
-
-Meet TMS-Client [here!](http://on-the-way.netlify.app/)
-
 ## Status
 Cause backend is not working, this client does not work either.
 
